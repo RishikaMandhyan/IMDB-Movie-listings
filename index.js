@@ -76,8 +76,10 @@ function render_list()
         info_container.appendChild(info_movie_type);
         info_container.appendChild(info_movie_id);
 
-        movie_container.appendChild(movie_title);
+        movie_container.setAttribute("class", "movie_container");
         movie_container.appendChild(movie_img);
+        
+        movie_container.appendChild(movie_title);
         movie_container.appendChild(rating);
         movie_container.appendChild(comment);
         movie_container.appendChild(submit_button);
