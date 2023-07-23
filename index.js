@@ -22,6 +22,10 @@ var page_num_span=document.getElementById("page_num");
 function render_list()
 {
     parent_container.innerHTML='';
+    if(!movie_array) alert("No movies/series to show");
+    else 
+    {
+           
     movie_array.forEach(function(item)
     {
       
@@ -44,9 +48,6 @@ function render_list()
             show_movie_details(x);
         });
 
-
-        
-        
         rating.setAttribute("placeholder", "Leave a 1-5 rating");
         rating.setAttribute("id", "r"+item.imdbID);
         comment.setAttribute("placeholder", "Leave a review");
@@ -84,6 +85,7 @@ function render_list()
         parent_container.appendChild(movie_container);
       }
     );
+    }
 
 }
 
@@ -91,13 +93,13 @@ function render_list()
 function show_movie_details(movie_id)
 {
 
-    console.log(movie_id);
+    //console.log(movie_id);
     var index= movie_array.findIndex(function(item)
     {
         return (item.imdbID===movie_id);
     })
 
-    console.log(index);
+    //console.log(index);
 
     movie_array[index].display_info=true;
     render_list();
@@ -129,7 +131,7 @@ function add_rating(movie_id, user_rating, user_comment)
   {
        search_string=search_string+"+"+search_keywords[i];
   }
-  console.log(search_string);
+  //console.log(search_string);
 
     fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=c34c97b2&s=${search_string}`)
     .then((response) => 
@@ -145,7 +147,7 @@ function add_rating(movie_id, user_rating, user_comment)
 
     movie_array= data.Search;
     total_movies=parseInt(data.totalResults);
-    console.log(movie_array);
+    //console.log(movie_array);
     render_list();
         
     })
@@ -169,13 +171,11 @@ forward_arrow.addEventListener("click", function(){
 
    // console.log(Math.ceil(total_movies/10));
     if(page_num< Math.ceil(total_movies/10))
-    {
-        
-    page_num++;
-    change_page(page_num);
-
-
+    { 
+        page_num++;
+        change_page(page_num);
     }
+    else alert ("No more items to show");
     
 })
 
@@ -186,6 +186,8 @@ back_arrow.addEventListener("click", function(){
         page_num--;
         change_page(page_num);
     }
+    
+    else alert ("No more items to show");
 
     
 })
@@ -208,7 +210,7 @@ function change_page(page_number){
     {
 
     movie_array= data.Search;
-    console.log(movie_array);
+    //console.log(movie_array);
     render_list();
         
     })
