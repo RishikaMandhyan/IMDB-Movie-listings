@@ -1,11 +1,12 @@
 
 
-// localStorage.setItem('todos', JSON.stringify(todo_list));
 
-// var todo_string= localStorage.getItem('todos');
-//         var todo_list=JSON.parse(todo_string);
-
-
+var ratings_string= localStorage.getItem('ratings_comments');
+var user_rating_comment=JSON.parse(ratings_string);
+if(user_rating_comment==null) 
+{ 
+    user_rating_comment=new Array(0);
+}
 
 var movie_array=new Array(0);
 var total_movies=0;
@@ -27,6 +28,9 @@ function render_list()
         var movie_container= document.createElement("div");
         var movie_title=document.createElement("p");
         var movie_img=document.createElement("img");
+        var rating=document.createElement("input");
+        var comment=document.createElement("input");
+        var submit_button=document.createElement("button");
 
         movie_title.innerText=item.Title;
         if(item.display_info) movie_title.style.display="none";
@@ -35,11 +39,24 @@ function render_list()
         movie_title.setAttribute("id", "p"+item.imdbID);
         movie_img.setAttribute("src", item.Poster);
         var x=item.imdbID;
-        movie_container.addEventListener("click", function()
+        movie_title.addEventListener("click", function()
         {
             show_movie_details(x);
         });
+
+
         
+        
+        rating.setAttribute("placeholder", "Leave a 1-5 rating");
+        rating.setAttribute("id", "r"+item.imdbID);
+        comment.setAttribute("placeholder", "Leave a review");
+        comment.setAttribute("id", "c"+item.imdbID);
+        submit_button.innerText="Save";
+        submit_button.addEventListener("click", function(event)
+        {
+             add_rating(x, document.getElementById("r"+item.imdbID).value,   document.getElementById("c"+item.imdbID).value );
+        })
+
 
         var info_container= document.createElement("div");
         if(item.display_info) info_container.style.display="block";
@@ -60,6 +77,9 @@ function render_list()
 
         movie_container.appendChild(movie_title);
         movie_container.appendChild(movie_img);
+        movie_container.appendChild(rating);
+        movie_container.appendChild(comment);
+        movie_container.appendChild(submit_button);
         movie_container.appendChild(info_container);
         parent_container.appendChild(movie_container);
       }
@@ -83,6 +103,19 @@ function show_movie_details(movie_id)
     render_list();
 }
 
+function add_rating(movie_id, user_rating, user_comment)
+{
+    var index= movie_array.findIndex(function(item)
+    {
+        return (item.imdbID===movie_id);
+    })
+
+    movie_array[index].rating=user_rating;
+    movie_array[index].comment=user_comment;
+    user_rating_comment.push(movie_array[index]);
+    localStorage.setItem('ratings_comments', JSON.stringify(user_rating_comment));
+    
+}
 
 
 
@@ -187,6 +220,10 @@ function change_page(page_number){
 
 
 }
+
+
+
+
 
 
   
