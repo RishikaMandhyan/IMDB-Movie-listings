@@ -1,5 +1,4 @@
 # IMDB-Movie-listings
-Inorder to run the app, git clone the above repository and connect to Live Server after opening the folder in VS code.
 
 Features added: 
 1. Search by title feature
@@ -16,13 +15,4 @@ Desktop view:
 
 ![image](https://github.com/RishikaMandhyan/IMDB-Movie-listings/assets/54908793/55f261b2-5757-4e9d-9907-aecd408a3fdd)
 
-
-Tablet view:
-
-![image](https://github.com/RishikaMandhyan/IMDB-Movie-listings/assets/54908793/bd7a1c40-9188-420e-86d1-cd2c154a51bd)
-
-
-Mobile view:
-
-![image](https://github.com/RishikaMandhyan/IMDB-Movie-listings/assets/54908793/daae8470-936c-4e2c-8cb5-6ece8fc3e690)
 
